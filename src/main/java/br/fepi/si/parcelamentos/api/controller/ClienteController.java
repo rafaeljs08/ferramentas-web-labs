@@ -57,7 +57,28 @@ public class ClienteController {
 
     }
 
+    @DeleteMapping("/{clienteId}")
+    public ResponseEntity<Void> excluir (@PathVariable Long clienteId) {
+
+        if (!clienteRepository.existsById(clienteId)){
+            return ResponseEntity.notFound().build();
+        }
+
+        clienteRepository.deleteById(clienteId);
+        return ResponseEntity.noContent().build();
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
 
 
 
