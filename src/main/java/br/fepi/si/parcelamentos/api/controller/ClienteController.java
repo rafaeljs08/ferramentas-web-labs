@@ -18,18 +18,18 @@ public class ClienteController {
     private final ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<Cliente> listar(){
+    public List<Cliente> listar() {
 
         return clienteRepository.findAll();
 
     }
 
-    @GetMapping ("/{clienteId}")
-    public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId){
+    @GetMapping("/{clienteId}")
+    public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId) {
 
         Optional<Cliente> cliente = clienteRepository.findById(clienteId);
 
-        if (cliente.isPresent()){
+        if (cliente.isPresent()) {
             return ResponseEntity.ok(cliente.get());
         }
 
@@ -39,8 +39,34 @@ public class ClienteController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Cliente inserir (@RequestBody Cliente cliente) {
+    public Cliente inserir(@RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
+    @PutMapping("/{clienteId}")
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId,
+                                             @RequestBody Cliente cliente) {
+        if (!clienteRepository.existsById(clienteId)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        cliente.setId(clienteId);
+        cliente = clienteRepository.save(cliente);
+
+        return ResponseEntity.ok(cliente);
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
