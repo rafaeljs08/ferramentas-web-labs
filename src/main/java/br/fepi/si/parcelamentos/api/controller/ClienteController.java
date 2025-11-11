@@ -2,6 +2,7 @@ package br.fepi.si.parcelamentos.api.controller;
 
 import br.fepi.si.parcelamentos.domain.model.Cliente;
 import br.fepi.si.parcelamentos.domain.repository.ClienteRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +40,13 @@ public class ClienteController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Cliente inserir(@RequestBody Cliente cliente) {
+    public Cliente inserir(@Valid @RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
     @PutMapping("/{clienteId}")
     public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId,
-                                             @RequestBody Cliente cliente) {
+                                             @Valid @RequestBody Cliente cliente) {
         if (!clienteRepository.existsById(clienteId)) {
             return ResponseEntity.notFound().build();
         }
