@@ -16,7 +16,7 @@ public class ClienteController {
 
         var cliente1 = new Cliente();
         cliente1.setId(1L);
-        cliente1.setNome("Joãozinho");
+        cliente1.setNome("Joana");
         cliente1.setEmail("joao@fepi.br");
         cliente1.setTelefone("126549-4564");
 
@@ -24,7 +24,7 @@ public class ClienteController {
         cliente2.setId(2L);
         cliente2.setNome("Maria");
         cliente2.setEmail("maria@fepi.br");
-        cliente2.setTelefone("15988-4500");
+        cliente2.setTelefone("15988-4000");
 
         return Arrays.asList(cliente1, cliente2);
     }
